@@ -13,6 +13,7 @@ services:
       - bank
 
 
+
   accounts:
     image: "iritik/accounts:s6"
     container_name: accounts-ms
@@ -27,9 +28,10 @@ services:
       - bank
 
     environment:
-      SPRING_APPLICATION_NAME: 
-      SPRING_CONFIG_IMPORT: "configserver:http://configserver:8071"
+      SPRING_APPLICATION_NAME: "accounts"
+      SPRING_CONFIG_IMPORT: "configserver:http://configserver:8071/"
       SPRING_PROFILES_ACTIVE: default
+
 
 
   loans:
@@ -45,6 +47,12 @@ services:
     networks:
       - bank
 
+    environment:
+      SPRING_APPLICATION_NAME: "loans"
+      SPRING_CONFIG_IMPORT: "configserver:http://configserver:8071/"
+      SPRING_PROFILES_ACTIVE: default
+
+
 
   cards:
     image: "iritik/cards-service:s6"
@@ -58,6 +66,11 @@ services:
 
     networks:
       - bank
+
+    environment:
+      SPRING_APPLICATION_NAME: "cards"
+      SPRING_CONFIG_IMPORT: "configserver:http://configserver:8071/"
+      SPRING_PROFILES_ACTIVE: default
 
 networks:
   bank:
